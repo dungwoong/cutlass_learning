@@ -83,8 +83,8 @@ class BarrierLifetime:
 
         # you should fence after, otherwise threads could try to arrive before thread0 initializes the barrier(?)
         # the quack GEMM example doesn't do this though
-        pipeline_init_arrive()
-        pipeline_init_wait()
+        pipeline_init_arrive() # this creates a fence, so you can't reorder the mbarrier init to be after this fence
+        pipeline_init_wait() # this will sync based on the pipeline.Agent you put in, so like a __syncthreads() in this case
 
         if warp_idx == 0:
             # producer
