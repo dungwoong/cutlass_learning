@@ -150,7 +150,7 @@ class MulticastCopy:
         Make pipeline
         """
         producer_count = 1
-        # TODO can't we replace this with something else
+        # TODO you have to actually multiply consumer count by an mcast size
         ab_pipeline_producer_group = pipeline.CooperativeGroup(pipeline.Agent.Thread, producer_count)
         ab_pipeline_consumer_group = pipeline.CooperativeGroup(pipeline.Agent.Thread, consumer_arrive_count)
         return pipeline.PipelineTmaAsync.create(
